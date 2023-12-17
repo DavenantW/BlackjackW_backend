@@ -1,14 +1,11 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker, DeclarativeBase
-import config
-
-engine = create_engine(
-    url=config.pg(),
-    echo=False
-)
-
-session_factory = sessionmaker(engine)
+# function on the orm
+from engine import session_factory, engine, Base
+import models
 
 
-class Base(DeclarativeBase):
-    pass
+def create_tables():
+    Base.metadata.drop_all(engine)
+    Base.metadata.create_all(engine)
+
+
+create_tables()
