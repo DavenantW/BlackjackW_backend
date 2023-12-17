@@ -1,10 +1,15 @@
 from sqlalchemy import Table, Column, Integer, String, MetaData
 from sqlalchemy.orm import Mapped, mapped_column
-from DB_func import Base
+from orm import Base
 
 
-class Chenge(Base):
-    __tablename__ = 'chenge'
+class Users(Base):
+    __tablename__ = 'Users'
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    chenge: Mapped[str]
+    name: Mapped[str] = mapped_column(String(32))
+    email: Mapped[str] = mapped_column(String(256))
+    password: Mapped[str] = mapped_column(String(256))
+    games: Mapped[int] = mapped_column(default=0)
+    wins: Mapped[int] = mapped_column(default=0)
+    money: Mapped[int] = mapped_column(default=0)
