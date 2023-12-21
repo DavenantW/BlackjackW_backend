@@ -27,14 +27,15 @@ def new_userORM(email: str, password: str, name: str = 'anonim', **id: int):
         session.add_all([user_create2,user_create])
         # create user in Statistics table
         session.commit()
-""" 
+ 
 def select_via_email(search_email):
   with session_factory() as session:
-    
-    select_user_email = session.query(Users.email).filter_by()
-    print(select_user_email)
-
-    
+    query_email = (select(Users.email).filter_by(email = search_email))
+    res = session.execute(query_email)
+    res_all = res.all()
+    print(f"{query_email.compile(compile_kwargs={"literal_binds":True})}")
+    print(res_all)
+"""    
 def update_User(**kwargs):
   id_user = Users.id
   id_stat = Statistics.id
@@ -46,8 +47,7 @@ def update_User(**kwargs):
     updates2.name = new_name
     
 create_tables()
-
-select_Users_ORM()
+"""
+# select_Users_ORM()
 # new_userORM('asasasa','sasa','sasa' , id = 2)
-# select_via_email('dimahubulwqsq')
-# """
+select_via_email('dimahubulwqsq')
