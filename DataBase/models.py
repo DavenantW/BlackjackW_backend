@@ -2,7 +2,7 @@ import datetime
 
 from sqlalchemy import Table, Column, Integer, String, MetaData, VARCHAR, VARBINARY
 from sqlalchemy.orm import Mapped, mapped_column
-from DataBase.factory_engine import Base
+from DataBase.factory_engine import Base, engine
 from bcrypt import hashpw, gensalt, checkpw
 
 
@@ -36,3 +36,11 @@ class Statistics(Base):
     games: Mapped[int] = mapped_column(default=0)
     wins: Mapped[int] = mapped_column(default=0)
     money: Mapped[int] = mapped_column(default=0)
+
+
+def __create_tables():
+    Base.metadata.create_all(engine)
+
+
+def __drop_tables():
+    Base.metadata.drop_all(engine)
