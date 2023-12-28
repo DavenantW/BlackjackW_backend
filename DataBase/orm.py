@@ -1,6 +1,6 @@
 # function on the orm
-from DataBase.factory_engine import session_factory, engine, Base
-from DataBase.models import Users, Statistics
+from factory_engine import session_factory, engine, Base
+from models import Users, Statistics
 from sqlalchemy.sql import *
 
 
@@ -82,3 +82,22 @@ def update_user(id_user: int, id: int = None, email: str = None, password: str =
         if money:
             user_statistics.money += money
         session.commit()
+
+def select_user_games(games: int):
+    
+    """ find user via games """
+    
+    with session_factory() as session:
+        query = select(Statistics.id).filter_by(games=games)
+        res = session.execute(query)
+        resp = res.fetchone()[0]
+        return resp
+def select_user_wins(wins: int):
+    
+    """ find user via wins """
+    
+    with session_factory() as session:
+        query = select(Statistics.id).filter_by(wins=wins)
+        res_win = session.execute(query)
+        resp = res_win.fetchone()[0]
+        return resp

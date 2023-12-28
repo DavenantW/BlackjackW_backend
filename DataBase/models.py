@@ -2,7 +2,7 @@ import datetime
 
 from sqlalchemy import Table, Column, Integer, String, MetaData, VARCHAR, VARBINARY
 from sqlalchemy.orm import Mapped, mapped_column
-from DataBase.factory_engine import Base, engine
+from factory_engine import Base, engine
 from bcrypt import hashpw, gensalt, checkpw
 
 
