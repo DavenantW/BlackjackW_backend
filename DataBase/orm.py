@@ -92,6 +92,9 @@ def select_user_games(games: int):
         res = session.execute(query)
         resp = res.fetchone()[0]
         return resp
+
+
+
 def select_user_wins(wins: int):
     
     """ find user via wins """
@@ -101,3 +104,25 @@ def select_user_wins(wins: int):
         res_win = session.execute(query)
         resp = res_win.fetchone()[0]
         return resp
+
+def top_ten():
+
+    """get top ten users by our money"""
+
+    with session_factory() as session:
+        query = select(Statistics.money)
+        resp = session.execute(query)
+        all_money = resp.all()
+        
+        res = []
+        for i in range(len(all_money)):
+            res.append((all_money[i][0]))
+        sort_list = sorted(res,reverse = True)
+        
+        sorted_id_by_money =[]
+        for b in range(len(sort_list)):
+            query = select(Statistics.id).filter_by(money = sort_list[b])
+            rwew = session.execute(query)
+            ee = rwew.all()
+            sorted_id_by_money.append(ee)
+        return sorted_id_by_money, sort_list
