@@ -1,9 +1,10 @@
 from rest_framework import serializers
 
-from API.models import TestModel
+from API.models import *
 
 
 class BlackjackSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TestModel
-        fields = ('title', 'content')
+        model = Users
+
+        fields = ("name", "email", "password_hash")
