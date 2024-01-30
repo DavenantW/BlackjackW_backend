@@ -1,10 +1,11 @@
 from rest_framework import serializers
 
-from API.models import *
 
-
-class BlackjackSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Users
-
-        fields = ("name", "email", "password_hash")
+class UsersSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    email = serializers.CharField()
+    password_hash = serializers.IntegerField()
+    money = serializers.IntegerField()
+    games = serializers.IntegerField()
+    wins = serializers.IntegerField()

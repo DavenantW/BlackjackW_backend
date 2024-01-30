@@ -1,9 +1,10 @@
-from rest_framework import generics
+from rest_framework.views import Response
+from .models import Users
+from .serializers import UsersSerializer
+from rest_framework.views import APIView
 
-from API.models import *
-from API.serializers import BlackjackSerializer
 
-
-class BlackjackApiView(generics.ListAPIView):
-    queryset = Users.objects.all()
-    serializer_class = BlackjackSerializer
+class UsersApiView(APIView):
+    def get(self, request):
+        UsersSet = Users.objects.all()
+        return Response({"all Users": UsersSerializer(UsersSet, many=True).data})
