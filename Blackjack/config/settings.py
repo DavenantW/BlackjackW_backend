@@ -44,12 +44,14 @@ INSTALLED_APPS += [
     "django_filters",
     "corsheaders",
     "djoser",
+
 ]
 
 # apps
 INSTALLED_APPS += [
     "api",
     "common",
+    "users",
 ]
 
 
